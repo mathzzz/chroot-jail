@@ -1,0 +1,34 @@
+Jail TODO 
+
+
+- More code cleanUp and comment it
+- Generate good documentation
+- Fix the problem that happens with SSH and Telnet that these
+  programs tries to change to the user directory, and due the
+  user has a $ in the path (only when you try to change to 
+  a directory inside another one) this programs complain about
+  this.
+
+  by example:
+
+	test:x:1002:1002:Test,,,:/home/chroot$/home/test:/usr/local/bin/jail
+
+  this will do a chroot in /home/chroot and changes to the 
+  directory /home/chroot/home/test, so the user see "/home/test" as
+  is home directory. In this case, SSH and Telnet will complain 
+  about "/home/chroot$/home/test" doesn't exist. The workarround is
+  to make a directory called "/home/chroot$/home/test". We are 
+  working on this.
+
+  If you use the plain jail (that is, without split path) Jail runs
+  fine.
+
+mkenv
+
+  change var/tmp tmp permissions
+  libproc.so.2.0.6
+  security hole with /proc 
+  so no ps no kill can be used :(
+  generate the configuration files
+  show the process to get the info to run in this platform
+

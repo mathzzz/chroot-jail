@@ -1,0 +1,15 @@
+Jail v1.9
+A kick and dirty chrooted login shell implementation
+Released under GNU Public License v 2.0
+
+Juan M. Casillas <juanm.casillas@jmcresearch.com>
+
+
+INSTALLATION
+
+Please refer to doc/INSTALL for detailed information.
+
+COMPILATION
+
+cd src; make all install
+
