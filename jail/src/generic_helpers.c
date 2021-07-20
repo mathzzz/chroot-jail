@@ -39,6 +39,8 @@
 #include <unistd.h>
 #include <assert.h>
 
+#include <sys/sysmacros.h>
+
 #if defined( __SOLARIS__) || defined(__IRIX__)
      #include <sys/types.h>
      #include <sys/mkdev.h>

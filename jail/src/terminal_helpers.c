@@ -35,6 +35,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/sysmacros.h>
 
 #if defined(__SOLARIS__) || defined(__IRIX__)
    #include <sys/types.h>
