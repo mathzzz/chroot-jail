@@ -1,0 +1,7 @@
+sudo useradd -s /bin/bash $1 
+sudo passwd $1
+
+
+sudo mkjailenv
+sudo addjailsw $2 
+sudo addjailuser $2 /home/$1 /bin/bash $1
