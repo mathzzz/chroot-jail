@@ -6,20 +6,25 @@
 make
 su root
 make install
-PATH=$PATH:/root/sbin
+prefix=/root
+PATH=$PATH:$prefix/sbin
 JAIL=/home/jail
 juser=ping
 mkdir $JAIL
 chown root:root $JAIL
-jk_init -vj $JAIL basicshell editors netutils extendedshell ssh scp
-useradd -s /bin/bash -p ' ' -c 'chroot user' -m -d /home/$juser $juser
-jk_cp -j $JAIL /root/sbin/jk_lsh id ping tcpping
+jk_init -vj $JAIL basicshell editors netutils extendedshell ssh scp id groups ping
+useradd -m -d /home/$juser $juser
+jk_cp -j $JAIL $prefix/sbin/jk_lsh 
 jk_jailuser -m -j $JAIL $juser
 mkdir $JAIL/tmp
 chmod a+rwx $JAIL/tmp
+
 #modify /bin/bash
-sed '/^ping:x/s,/bin/bash,/root/sbin/jk_chrootsh,' /etc/passwd 
-sed '/^ping:x/s,/jk_chrootsh,/bin/bash' $JAIL/etc/passwd
+sh=$(awk "/^$juser/{print }" FS=: $JAIL/etc/passwd)
+sed -i "/^$juser:x/s,$sh,/bin/bash," $JAIL/etc/passwd
+
+passwd $juser
+
 cat $JAIL/etc/group 
 #mkdir $JAIL/proc
 #mount -t proc proc $JAIL/proc
