@@ -20,7 +20,7 @@ mkdir $JAIL/tmp
 chmod a+rwx $JAIL/tmp
 
 #modify /bin/bash
-sh=$(awk "/^$juser/{print }" FS=: $JAIL/etc/passwd)
+sh=$(awk "/^$juser/{print $NF}" FS=: $JAIL/etc/passwd)
 sed -i "/^$juser:x/s,$sh,/bin/bash," $JAIL/etc/passwd
 
 passwd $juser
